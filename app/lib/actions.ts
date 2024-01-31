@@ -1,7 +1,20 @@
 'use server';
 
 import { z } from 'zod';
-import { sql } from '@vercel/postgres';
+
+// with vercel
+// import { sql } from '@vercel/postgres';
+
+const postgres = require('postgres');
+
+// const sql = postgres(process.env.POSTGRES_URL, {
+//   host                 : process.env.POSTGRES_HOST,            // Postgres ip address[s] or domain name[s]
+//   port                 : process.env.POSTGRES_PORT,          // Postgres server port[s]
+//   database             : process.env.POSTGRES_DATABASE,            // Name of database to connect to
+//   username             : process.env.POSTGRES_USER,            // Username of database user
+//   password             : process.env.POSTGRES_PASSWORD,            // Password of database user
+// });
+
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -60,6 +73,14 @@ export async function createInvoice(prevState: State, formData: FormData) {
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
+
+  const sql = postgres(process.env.POSTGRES_URL, {
+    host                 : process.env.POSTGRES_HOST,            // Postgres ip address[s] or domain name[s]
+    port                 : process.env.POSTGRES_PORT,          // Postgres server port[s]
+    database             : process.env.POSTGRES_DATABASE,            // Name of database to connect to
+    username             : process.env.POSTGRES_USER,            // Username of database user
+    password             : process.env.POSTGRES_PASSWORD,            // Password of database user
+  });
  
   // Insert data into the database
   try {
@@ -67,7 +88,9 @@ export async function createInvoice(prevState: State, formData: FormData) {
       INSERT INTO invoices (customer_id, amount, status, date)
       VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
+    await sql.end();
   } catch (error) {
+    await sql.end();
     // If a database error occurs, return a more specific error.
     return {
       message: 'Database Error: Failed to Create Invoice.',
@@ -107,13 +130,23 @@ export async function updateInvoice(
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
  
+  const sql = postgres(process.env.POSTGRES_URL, {
+    host                 : process.env.POSTGRES_HOST,            // Postgres ip address[s] or domain name[s]
+    port                 : process.env.POSTGRES_PORT,          // Postgres server port[s]
+    database             : process.env.POSTGRES_DATABASE,            // Name of database to connect to
+    username             : process.env.POSTGRES_USER,            // Username of database user
+    password             : process.env.POSTGRES_PASSWORD,            // Password of database user
+  });
+
   try {
     await sql`
       UPDATE invoices
       SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
       WHERE id = ${id}
     `;
+    await sql.end();
   } catch (error) {
+    await sql.end();
     return { message: 'Database Error: Failed to Update Invoice.' };
   }
  
@@ -122,11 +155,22 @@ export async function updateInvoice(
 }
 
 export async function deleteInvoice(id: string) {
+
+  const sql = postgres(process.env.POSTGRES_URL, {
+    host                 : process.env.POSTGRES_HOST,            // Postgres ip address[s] or domain name[s]
+    port                 : process.env.POSTGRES_PORT,          // Postgres server port[s]
+    database             : process.env.POSTGRES_DATABASE,            // Name of database to connect to
+    username             : process.env.POSTGRES_USER,            // Username of database user
+    password             : process.env.POSTGRES_PASSWORD,            // Password of database user
+  });
+
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
+    await sql.end();
     revalidatePath('/dashboard/invoices');
     return { message: 'Deleted Invoice.' };
   } catch (error) {
+    await sql.end();
     return { message: 'Database Error: Failed to Delete Invoice.' };
   }
 }
