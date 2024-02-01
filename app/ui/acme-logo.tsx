@@ -8,7 +8,7 @@ export default function AcmeLogo() {
     >
       {/* <GlobeAltIcon className="h-12 w-12 rotate-[15deg]" /> */}
       <CakeIcon className="h-12 w-12 rotate-[15deg]" />
-      <p className="text-[44px]">Menu</p>
+      <p className="text-[44px]">{' '}Menu</p>
     </div>
   );
 }
