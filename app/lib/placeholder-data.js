@@ -182,6 +182,8 @@ const revenue = [
 
 // prod
 
+
+
 // ventsE
 // id,
 // title,
@@ -195,14 +197,13 @@ const revenue = [
 // menurequest : IN-HOUSE | CATERED,
 // typeofservice = PACKED | PLATED | BUFFET | PASS AROUND
 // servingschedule = BREAKFAST | AM SNACK | LUNCH | PM SNACK | DINNER | MID-NIGHT SNACK,
-// ttimeofserving: 01:30:07,
+// timeofserving: 01:30:07,
 // foodrestriction: No | Yes,
 // foodinstruction,
 // remarks: long text,
 // user_id = userid,
 // created_at,
 // updated_at
-
 
 // removed
 // typeofdrinks: Bottled Water | Coffee / Tea | Others,
@@ -211,9 +212,51 @@ const revenue = [
 // attire: nullable,
 // entrancegate: nullable,
 
+const ventse = [
+  {
+    title: "CABINET MEETING",
+    start_on: "2024-08-30 09:00",
+    start_at: "2024-08-30 10:00",
+    pax: 100,
+    purpose: "SUMMER VACATION",
+    venue: "PRESIDENT'S HALL",
+    holdingroom: "",
+    eventsetup: "CONFERENCE MEETING STYLE",
+    menurequest: "IN-HOUSE",
+    typeofservice: "PLATED",
+    servingschedule: "DINNER",
+    timeofserving: "01:30:07",
+    foodrestriction: "No",
+    foodinstruction: "",
+    remarks: "",
+    user_id: users[0].id
+  }, 
+  {
+    title: "OATH TAKING CEREMONY",
+    start_on: "2024-04-23 09:00",
+    start_at: "2024-04-23 10:00",
+    pax: 100,
+    purpose: "PRESIDENTIAL EVENT",
+    venue: "CEREMONIAL HALL",
+    holdingroom: "",
+    eventsetup: "THEATER STYLE",
+    menurequest: "IN-HOUSE",
+    typeofservice: "PLATED",
+    servingschedule: "PM SNACK",
+    timeofserving: "01:30:07",
+    foodrestriction: "No",
+    foodinstruction: "",
+    remarks: "",
+    user_id: users[0].id
+  }, 
+];
+
+
+
 module.exports = {
-  users,
-  customers,
   invoices,
+  customers,
   revenue,
+  users,
+  ventse,
 };

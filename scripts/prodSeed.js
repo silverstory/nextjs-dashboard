@@ -4,11 +4,11 @@
 const postgres = require('postgres');
 
 const sql = postgres(process.env.POSTGRES_URL, {
-  host                 : process.env.POSTGRES_HOST,            // Postgres ip address[s] or domain name[s]
-  port                 : process.env.POSTGRES_PORT,          // Postgres server port[s]
-  database             : process.env.POSTGRES_DATABASE,            // Name of database to connect to
-  username             : process.env.POSTGRES_USER,            // Username of database user
-  password             : process.env.POSTGRES_PASSWORD,            // Password of database user
+  host: process.env.POSTGRES_HOST, // Postgres ip address[s] or domain name[s]
+  port: process.env.POSTGRES_PORT, // Postgres server port[s]
+  database: process.env.POSTGRES_DATABASE, // Name of database to connect to
+  username: process.env.POSTGRES_USER, // Username of database user
+  password: process.env.POSTGRES_PASSWORD, // Password of database user
 });
 
 const {
@@ -16,6 +16,7 @@ const {
   customers,
   revenue,
   users,
+  ventse,
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
@@ -58,9 +59,10 @@ async function seedHeavyUsers() {
   }
 }
 
-
 //     use on recipe and ingredients
 //     customer_id UUID NOT NULL,
+
+// deal with dates with TO_DATE(), LOCALTIMESTAMP, NOW(), CURRENT_TIMESTAMP
 
 async function seedVentsE() {
   try {
@@ -99,26 +101,43 @@ async function seedVentsE() {
       ventse.map(
         (ventse) => sql`
         INSERT INTO invoices (
-            id,
-            title,
-            start_on: "2023-08-30 09:00",
-            start_at: "2023-08-30 10:00",
-            pax = 0,
-            purpose,
-            venue: CEREMONIAL HALL | HEROES HALL | PRESIDENT'S HALL | HOLDING ROOM | OTHERS,
-            holdingroom,
-            eventsetup = THEATER STYLE | CONFERENCE MEETING STYLE | CLASSROOM STYLE | BANQUET STYLE | OTHERS,
-            menurequest : IN-HOUSE | CATERED,
-            typeofservice = PACKED | PLATED | BUFFET | PASS AROUND
-            servingschedule = BREAKFAST | AM SNACK | LUNCH | PM SNACK | DINNER | MID-NIGHT SNACK,
-            ttimeofserving: 01:30:07,
-            foodrestriction: No | Yes,
-            foodinstruction,
-            remarks: long text,
-            user_id = userid,
-            created_at,
-            updated_at)
-        VALUES (${ventse.customer_id}, ${ventse.amount}, ${ventse.status}, ${ventse.date})
+          title,
+          start_on,
+          start_at,
+          pax,
+          purpose,
+          venue,
+          holdingroom,
+          eventsetup,
+          menurequest,
+          typeofservice,
+          servingschedule,
+          timeofserving,
+          foodrestriction,
+          foodinstruction,
+          remarks,
+          user_id,
+          updated_at
+        )
+        VALUES (
+          ${ventse.title},
+          ${ventse.start_on},
+          ${ventse.start_at},
+          ${ventse.pax},
+          ${ventse.purpose},
+          ${ventse.venue},
+          ${ventse.holdingroom},
+          ${ventse.eventsetup},
+          ${ventse.menurequest},
+          ${ventse.typeofservice},
+          ${ventse.servingschedule},
+          ${ventse.timeofserving},
+          ${ventse.foodrestriction},
+          ${ventse.foodinstruction},
+          ${ventse.remarks},
+          ${ventse.user_id},
+          CURRENT_TIMESTAMP
+        )
         ON CONFLICT (id) DO NOTHING;
       `,
       ),
@@ -211,24 +230,23 @@ async function seedHeavyRevenue() {
 }
 
 async function main() {
+  //   vercel only
+  //   const client = await db.connect();
+  //   await seedUsers(client);
+  //   await seedCustomers(client);
+  //   await seedInvoices(client);
+  //   await seedRevenue(client);
+  //   await client.end();
 
-//   vercel only
-//   const client = await db.connect();
-//   await seedUsers(client);
-//   await seedCustomers(client);
-//   await seedInvoices(client);
-//   await seedRevenue(client);
-//   await client.end();
+  // local
+  // await seedUsers();
+  // await seedCustomers();
+  // await seedInvoices();
+  // await seedRevenue();
 
+  await seedVentsE();
 
-// local
-// await seedUsers();
-// await seedCustomers();
-// await seedInvoices();
-// await seedRevenue();
-
-await sql.end();
-
+  await sql.end();
 }
 
 main().catch((err) => {

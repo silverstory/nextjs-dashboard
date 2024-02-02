@@ -103,7 +103,7 @@ export type InvoiceForm = {
 // menurequest : IN-HOUSE | CATERED,
 // typeofservice = PACKED | PLATED | BUFFET | PASS AROUND
 // servingschedule = BREAKFAST | AM SNACK | LUNCH | PM SNACK | DINNER | MID-NIGHT SNACK,
-// ttimeofserving: 01:30:07,
+// timeofserving: 01:30:07,
 // foodrestriction: No | Yes,
 // foodinstruction,
 // remarks: long text,
@@ -118,3 +118,44 @@ export type InvoiceForm = {
 // tokengifts: No | Yes,
 // attire: nullable,
 // entrancegate: nullable,
+
+export type VenstE = {
+  id: string;
+  customer_id: string;
+  amount: number;
+  date: string;
+  // In TypeScript, this is called a string union type.
+  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
+  status: 'pending' | 'paid';
+};
+
+export type LatestVenstE = {
+  id: string;
+  name: string;
+  image_url: string;
+  email: string;
+  amount: string;
+};
+
+// The database returns a number for amount, but we later format it to a string with the formatCurrency function
+export type LatestVenstERaw = Omit<LatestVenstE, 'amount'> & {
+  amount: number;
+};
+
+export type VenstETable = {
+  id: string;
+  customer_id: string;
+  name: string;
+  email: string;
+  image_url: string;
+  date: string;
+  amount: number;
+  status: 'pending' | 'paid';
+};
+
+export type VenstEForm = {
+  id: string;
+  customer_id: string;
+  amount: number;
+  status: 'pending' | 'paid';
+};
