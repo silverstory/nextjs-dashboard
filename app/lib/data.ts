@@ -46,7 +46,7 @@ export async function fetchRevenue() {
 
     console.log('Data fetch completed after 3 seconds.');
 
-    // if vercel
+    // vercel only
     // return data.rows;
     
     await sql.end();
@@ -82,7 +82,7 @@ export async function fetchLatestInvoices() {
         ORDER BY invoices.date DESC
         LIMIT 5`;
 
-    // if vercel
+    // vercel only
     // const latestInvoices = data.rows.map((invoice) => ({
     //   ...invoice,
     //   amount: formatCurrency(invoice.amount),
@@ -131,7 +131,7 @@ export async function fetchCardData() {
       invoiceStatusPromise,
     ]);
 
-    // if vercel
+    // vercel only
     // const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
     // const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
     // const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
@@ -199,7 +199,7 @@ export async function fetchFilteredInvoices(
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 
-    // if vercel
+    // vercel only
     // return invoices.rows;
     
     await sql.end();
@@ -237,7 +237,7 @@ export async function fetchInvoicesPages(query: string) {
       invoices.status ILIKE ${`%${query}%`}
   `;
 
-    // if vercel
+    // vercel only
     // const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
 
     // local
@@ -276,7 +276,7 @@ export async function fetchInvoiceById(id: string) {
       WHERE invoices.id = ${id};
     `;
 
-    // if vercel
+    // vercel only
     // const invoice = data.rows.map((invoice) => ({
     //   ...invoice,
     //   // Convert amount from cents to dollars
@@ -320,7 +320,7 @@ export async function fetchCustomers() {
       ORDER BY name ASC
     `;
 
-    // if vercel
+    // vercel only
     // const customers = data.rows;
     
     // local
@@ -366,7 +366,7 @@ export async function fetchFilteredCustomers(query: string) {
 		ORDER BY customers.name ASC
 	  `;
 
-    // if vercel
+    // vercel only
     // const customers = data.rows.map((customer) => ({
     //   ...customer,
     //   total_pending: formatCurrency(customer.total_pending),
@@ -403,7 +403,7 @@ export async function getUser(email: string) {
   try {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
 
-    // if vercel
+    // vercel only
     // return user.rows[0] as User;
 
     await sql.end();

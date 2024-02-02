@@ -34,7 +34,7 @@ async function getUser(email: string): Promise<User | undefined> {
     
     // console.log(...user);
 
-    // if vercel
+    // vercel only
     // return user.rows[0];
 
     // if local

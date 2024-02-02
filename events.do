@@ -5,8 +5,8 @@ Event
 
     id,
     title,
-    startdatetime: "2023-08-30 09:00",
-    enddatetime: "2023-08-30 10:00",
+    start_on,
+    start_at,
     pax = 0,
     purpose,
     venue: CEREMONIAL HALL | HEROES HALL | PRESIDENT'S HALL | OTHERS,

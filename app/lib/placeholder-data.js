@@ -180,6 +180,37 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
+// prod
+
+// ventsE
+// id,
+// title,
+// start_on: "2023-08-30 09:00",
+// start_at: "2023-08-30 10:00",
+// pax = 0,
+// purpose,
+// venue: CEREMONIAL HALL | HEROES HALL | PRESIDENT'S HALL | HOLDING ROOM | OTHERS,
+// holdingroom,
+// eventsetup = THEATER STYLE | CONFERENCE MEETING STYLE | CLASSROOM STYLE | BANQUET STYLE | OTHERS,
+// menurequest : IN-HOUSE | CATERED,
+// typeofservice = PACKED | PLATED | BUFFET | PASS AROUND
+// servingschedule = BREAKFAST | AM SNACK | LUNCH | PM SNACK | DINNER | MID-NIGHT SNACK,
+// ttimeofserving: 01:30:07,
+// foodrestriction: No | Yes,
+// foodinstruction,
+// remarks: long text,
+// user_id = userid,
+// created_at,
+// updated_at
+
+
+// removed
+// typeofdrinks: Bottled Water | Coffee / Tea | Others,
+// audiovisualreqs: PROJECTOR | SOUND SYSTEM | MONITOR/LCD | LAPTOP | MICROPHONE | PODIUM | STAGE,
+// tokengifts: No | Yes,
+// attire: nullable,
+// entrancegate: nullable,
+
 module.exports = {
   users,
   customers,
