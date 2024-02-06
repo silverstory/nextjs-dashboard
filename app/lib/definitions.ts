@@ -92,7 +92,7 @@ export type InvoiceForm = {
 
 // ventsE
 // id,
-// title,
+// name,
 // start_on: "2023-08-30 09:00",
 // start_at: "2023-08-30 10:00",
 // pax = 0,
@@ -121,12 +121,26 @@ export type InvoiceForm = {
 
 export type VenstE = {
   id: string;
-  customer_id: string;
-  amount: number;
-  date: string;
+  name: string;
+  start_on: string;
+  start_at: string;
+  pax: number;
+  purpose: string;
   // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-  status: 'pending' | 'paid';
+  // It means that the "venue" property can only be one of the five strings below.
+  venue: 'CEREMONIAL HALL' | 'HEROES HALL' | 'PRESIDENT`S HALL' | 'HOLDING ROOM' | 'OTHERS';
+  holdingroom: string;
+  eventsetup: 'THEATER STYLE' | 'CONFERENCE MEETING STYLE' | 'CLASSROOM STYLE' | 'BANQUET STYLE' | 'OTHERS';
+  menurequest: 'IN-HOUSE' | 'CATERED';
+  typeofservice: 'PACKED' | 'PLATED' | 'BUFFET' | 'PASS AROUND';
+  servingschedule: 'BREAKFAST' | 'AM SNACK' | 'LUNCH' | 'PM SNACK' | 'DINNER' | 'MID-NIGHT SNACK';
+  timeofserving: string;
+  foodrestriction: 'No' | 'Yes';
+  foodinstruction: string;
+  remarks: string;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type LatestVenstE = {
@@ -142,20 +156,33 @@ export type LatestVenstERaw = Omit<LatestVenstE, 'amount'> & {
   amount: number;
 };
 
-export type VenstETable = {
+export type VenstETable = {  
   id: string;
-  customer_id: string;
   name: string;
-  email: string;
+  purpose: string;
   image_url: string;
-  date: string;
-  amount: number;
-  status: 'pending' | 'paid';
+  date: string; // start_on + start_at
+  pax: number;
+  venue: 'CEREMONIAL HALL' | 'HEROES HALL' | 'PRESIDENT`S HALL' | 'HOLDING ROOM' | 'OTHERS';
+  eventsetup: 'THEATER STYLE' | 'CONFERENCE MEETING STYLE' | 'CLASSROOM STYLE' | 'BANQUET STYLE' | 'OTHERS';
 };
 
 export type VenstEForm = {
   id: string;
-  customer_id: string;
-  amount: number;
-  status: 'pending' | 'paid';
+  name: string;
+  start_on: string;
+  start_at: string;
+  pax: number;
+  purpose: string;
+  venue: 'CEREMONIAL HALL' | 'HEROES HALL' | 'PRESIDENT`S HALL' | 'HOLDING ROOM' | 'OTHERS';
+  holdingroom: string;
+  eventsetup: 'THEATER STYLE' | 'CONFERENCE MEETING STYLE' | 'CLASSROOM STYLE' | 'BANQUET STYLE' | 'OTHERS';
+  menurequest: 'IN-HOUSE' | 'CATERED';
+  typeofservice: 'PACKED' | 'PLATED' | 'BUFFET' | 'PASS AROUND';
+  servingschedule: 'BREAKFAST' | 'AM SNACK' | 'LUNCH' | 'PM SNACK' | 'DINNER' | 'MID-NIGHT SNACK';
+  timeofserving: string;
+  foodrestriction: 'No' | 'Yes';
+  foodinstruction: string;
+  remarks: string;
+  user_id: string;
 };

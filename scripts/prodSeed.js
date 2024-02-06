@@ -73,7 +73,7 @@ async function seedVentsE() {
     const createTable = await sql`
     CREATE TABLE IF NOT EXISTS events (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     start_on DATE NOT NULL,
     start_at TIME NOT NULL,
     pax INT NOT NULL,
@@ -101,7 +101,7 @@ async function seedVentsE() {
       ventse.map(
         (ventse) => sql`
         INSERT INTO invoices (
-          title,
+          name,
           start_on,
           start_at,
           pax,
@@ -120,7 +120,7 @@ async function seedVentsE() {
           updated_at
         )
         VALUES (
-          ${ventse.title},
+          ${ventse.name},
           ${ventse.start_on},
           ${ventse.start_at},
           ${ventse.pax},

@@ -214,7 +214,7 @@ const revenue = [
 
 const ventse = [
   {
-    title: "CABINET MEETING",
+    name: "CABINET MEETING",
     start_on: "2024-08-30 09:00",
     start_at: "2024-08-30 10:00",
     pax: 100,
@@ -232,7 +232,7 @@ const ventse = [
     user_id: users[0].id
   }, 
   {
-    title: "OATH TAKING CEREMONY",
+    name: "OATH TAKING CEREMONY",
     start_on: "2024-04-23 09:00",
     start_at: "2024-04-23 10:00",
     pax: 100,
